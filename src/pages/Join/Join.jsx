@@ -1,2 +1,3 @@
 export default function Join() {
-  return <>Join</
+  return <div>Join</div>;
+}
