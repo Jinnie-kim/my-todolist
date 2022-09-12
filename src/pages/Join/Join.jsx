@@ -8,7 +8,7 @@ export default function Join() {
         <JoinFormLabel htmlFor="email">Email </JoinFormLabel>
         <JoinFormInput type="email" id="email" />
         <JoinFormLabel htmlFor="password">Password </JoinFormLabel>
-        <JoinFormInput type="email" id="password" />
+        <JoinFormInput type="password" id="password" />
         <JoinFormButton type="submit">JOIN</JoinFormButton>
       </JoinFormField>
     </JoinForm>

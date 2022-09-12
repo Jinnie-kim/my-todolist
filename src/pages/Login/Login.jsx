@@ -8,7 +8,7 @@ export default function Login() {
         <LoginFormLabel htmlFor="email">Email </LoginFormLabel>
         <LoginFormInput type="email" id="email" />
         <LoginFormLabel htmlFor="password">Password </LoginFormLabel>
-        <LoginFormInput type="email" id="password" />
+        <LoginFormInput type="password" id="password" />
         <LoginFormButton type="submit">LOGIN</LoginFormButton>
       </LoginFormField>
     </LoginForm>
