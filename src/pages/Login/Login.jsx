@@ -1,14 +1,45 @@
+import { useState } from 'react';
+import { useLogin } from '../../auth/useLogin';
+
 import styled from 'styled-components';
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useLogin();
+
+  const useDataHandler = (event) => {
+    if (event.target.type === 'email') {
+      setEmail(event.target.value);
+    }
+    if (event.target.type === 'password') {
+      setPassword(event.target.value);
+    }
+  };
+
+  const dataSubmitHandler = (event) => {
+    event.preventDefault();
+    login(email, password);
+  };
+
   return (
-    <LoginForm>
+    <LoginForm onSubmit={dataSubmitHandler}>
       <LoginFormField>
         <legend>LOGIN</legend>
         <LoginFormLabel htmlFor="email">Email </LoginFormLabel>
-        <LoginFormInput type="email" id="email" />
+        <LoginFormInput
+          type="email"
+          id="email"
+          required
+          onChange={useDataHandler}
+        />
         <LoginFormLabel htmlFor="password">Password </LoginFormLabel>
-        <LoginFormInput type="password" id="password" />
+        <LoginFormInput
+          type="password"
+          id="password"
+          required
+          onChange={useDataHandler}
+        />
         <LoginFormButton type="submit">LOGIN</LoginFormButton>
       </LoginFormField>
     </LoginForm>
