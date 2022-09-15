@@ -1,14 +1,45 @@
+import { useState } from 'react';
+import { useJoin } from '../../auth/useJoin';
+
 import styled from 'styled-components';
 
 export default function Join() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { join } = useJoin();
+
+  const useDataHandler = (event) => {
+    if (event.target.type === 'email') {
+      setEmail(event.target.value);
+    }
+    if (event.target.type === 'password') {
+      setPassword(event.target.value);
+    }
+  };
+
+  const dataSubmitHandler = (event) => {
+    event.preventDefault();
+    join(email, password);
+  };
+
   return (
-    <JoinForm>
+    <JoinForm onSubmit={dataSubmitHandler}>
       <JoinFormField>
         <legend>JOIN</legend>
         <JoinFormLabel htmlFor="email">Email </JoinFormLabel>
-        <JoinFormInput type="email" id="email" />
+        <JoinFormInput
+          type="email"
+          id="email"
+          required
+          onChange={useDataHandler}
+        />
         <JoinFormLabel htmlFor="password">Password </JoinFormLabel>
-        <JoinFormInput type="password" id="password" />
+        <JoinFormInput
+          type="password"
+          id="password"
+          required
+          onChange={useDataHandler}
+        />
         <JoinFormButton type="submit">JOIN</JoinFormButton>
       </JoinFormField>
     </JoinForm>
