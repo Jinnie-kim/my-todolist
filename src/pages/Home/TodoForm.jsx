@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useTodo } from '../../hooks/useTodo';
+import { useCreateTodo } from '../../hooks/useCreateTodo';
 
 import styled from 'styled-components';
 
 export const TodoForm = () => {
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
-  const { createTodo } = useTodo();
+  const { createTodo } = useCreateTodo();
 
   const userDataHandler = (event) => {
     if (event.target.id === 'todo') {
