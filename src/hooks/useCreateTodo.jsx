@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const useTodo = () => {
+export const useCreateTodo = () => {
   const token = localStorage.getItem('token');
   const createTodo = async (title, detail) => {
     try {
