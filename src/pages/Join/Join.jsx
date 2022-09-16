@@ -8,7 +8,7 @@ export default function Join() {
   const [password, setPassword] = useState('');
   const { join } = useJoin();
 
-  const useDataHandler = (event) => {
+  const userDataHandler = (event) => {
     if (event.target.type === 'email') {
       setEmail(event.target.value);
     }
@@ -31,14 +31,14 @@ export default function Join() {
           type="email"
           id="email"
           required
-          onChange={useDataHandler}
+          onChange={userDataHandler}
         />
         <JoinFormLabel htmlFor="password">Password </JoinFormLabel>
         <JoinFormInput
           type="password"
           id="password"
           required
-          onChange={useDataHandler}
+          onChange={userDataHandler}
         />
         <JoinFormButton type="submit">JOIN</JoinFormButton>
       </JoinFormField>

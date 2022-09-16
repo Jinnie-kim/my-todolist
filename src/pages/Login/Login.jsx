@@ -8,7 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const { login } = useLogin();
 
-  const useDataHandler = (event) => {
+  const userDataHandler = (event) => {
     if (event.target.type === 'email') {
       setEmail(event.target.value);
     }
@@ -31,14 +31,14 @@ export default function Login() {
           type="email"
           id="email"
           required
-          onChange={useDataHandler}
+          onChange={userDataHandler}
         />
         <LoginFormLabel htmlFor="password">Password </LoginFormLabel>
         <LoginFormInput
           type="password"
           id="password"
           required
-          onChange={useDataHandler}
+          onChange={userDataHandler}
         />
         <LoginFormButton type="submit">LOGIN</LoginFormButton>
       </LoginFormField>
