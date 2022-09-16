@@ -1,16 +1,43 @@
+import { useState } from 'react';
+import { useTodo } from '../../hooks/useTodo';
+
 import styled from 'styled-components';
 
 export const TodoForm = () => {
+  const [title, setTitle] = useState('');
+  const [detail, setDetail] = useState('');
+  const { createTodo } = useTodo();
+
+  const userDataHandler = (event) => {
+    if (event.target.id === 'todo') {
+      setTitle(event.target.value);
+    }
+    if (event.target.id === 'detail') {
+      setDetail(event.target.value);
+    }
+  };
+
+  const submitDataHandler = (event) => {
+    event.preventDefault();
+    createTodo(title, detail);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={submitDataHandler}>
       <label htmlFor="todo">TODO</label>
       <input
         type="text"
         id="todo"
         placeholder="what are you going todo ... :D"
+        onChange={userDataHandler}
       />
       <label htmlFor="detail">DETAIL</label>
-      <input type="text" id="detail" placeholder="tell me more :)" />
+      <input
+        type="text"
+        id="detail"
+        placeholder="tell me more :)"
+        onChange={userDataHandler}
+      />
       <button>ADD</button>
     </Form>
   );
