@@ -1,10 +1,45 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 
 export const TodoTitle = () => {
+  const [datas, setDatas] = useState([]);
+  const token = localStorage.getItem('token');
+
+  const getTodo = async () => {
+    try {
+      await axios
+        .get('http://localhost:8080/todos', {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((result) => {
+          setDatas(result.data.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTodo();
+  }, []); // react-query ?? 
+
   return (
     <Title>
-      <li>working on todolist</li>
-      <li>working on todolist</li>
+      {datas.length > 0 ? (
+        datas.map((data) => {
+          return (
+            <li key={data.id} id={data.id}>
+              {data.title}
+            </li>
+          );
+        })
+      ) : (
+        <strong>there is no todo :(</strong>
+      )}
     </Title>
   );
 };
