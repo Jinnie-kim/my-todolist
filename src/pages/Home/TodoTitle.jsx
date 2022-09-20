@@ -2,10 +2,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
+import { useGlobalContext } from '../../hooks/useGlobalContext';
 
 export const TodoTitle = () => {
   const [datas, setDatas] = useState([]);
   const token = localStorage.getItem('token');
+
+  // 글 개별 id 관리하기
+  const { dispatch } = useGlobalContext();
 
   const getTodo = async () => {
     try {
@@ -25,14 +29,18 @@ export const TodoTitle = () => {
 
   useEffect(() => {
     getTodo();
-  }, []); // react-query ?? 
+  }, []); // react-query ??
+
+  const getTodoIdHandler = (event) => {
+    dispatch({ type: 'detail', payload: event.target.id });
+  };
 
   return (
     <Title>
       {datas.length > 0 ? (
         datas.map((data) => {
           return (
-            <li key={data.id} id={data.id}>
+            <li key={data.id} id={data.id} onClick={getTodoIdHandler}>
               {data.title}
             </li>
           );
