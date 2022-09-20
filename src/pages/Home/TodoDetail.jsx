@@ -30,6 +30,18 @@ export const TodoDetail = () => {
     id && getTodoDetail();
   }, [id]);
 
+  const onTodoDeleteHandler = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/todos/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Detail>
       {id && (
@@ -38,7 +50,7 @@ export const TodoDetail = () => {
           <p>{detail}</p>
           <div>
             <button>EDIT</button>
-            <button>DEL</button>
+            <button onClick={onTodoDeleteHandler}>DEL</button>
           </div>
         </>
       )}
