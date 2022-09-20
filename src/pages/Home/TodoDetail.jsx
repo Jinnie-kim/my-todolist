@@ -1,14 +1,47 @@
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useGlobalContext } from '../../hooks/useGlobalContext';
 import styled from 'styled-components';
 
 export const TodoDetail = () => {
+  const [title, setTitle] = useState('');
+  const [detail, setDetail] = useState('');
+  const { id } = useGlobalContext();
+  const token = localStorage.getItem('token');
+
+  const getTodoDetail = async () => {
+    try {
+      await axios
+        .get(`http://localhost:8080/todos/${id}`, {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((result) => {
+          setTitle(result.data.data.title);
+          setDetail(result.data.data.content);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    id && getTodoDetail();
+  }, [id]);
+
   return (
     <Detail>
-      <h1>working on todolist</h1>
-      <p>make all components and page</p>
-      <div>
-        <button>EDIT</button>
-        <button>DEL</button>
-      </div>
+      {id && (
+        <>
+          <h1>{title}</h1>
+          <p>{detail}</p>
+          <div>
+            <button>EDIT</button>
+            <button>DEL</button>
+          </div>
+        </>
+      )}
     </Detail>
   );
 };
@@ -46,7 +79,7 @@ const Detail = styled.div`
     background-color: #6a4c93;
     font-weight: 700;
     color: #ffca3a;
-    cursor: pointer;;
+    cursor: pointer;
   }
 
   > div > button + button {
