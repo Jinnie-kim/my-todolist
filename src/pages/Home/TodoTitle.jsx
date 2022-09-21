@@ -28,8 +28,8 @@ export const TodoTitle = () => {
   };
 
   useEffect(() => {
-    getTodo();
-  }, []); // react-query ??
+    token && getTodo();
+  }, []); 
 
   const getTodoIdHandler = (event) => {
     dispatch({ type: 'detail', payload: event.target.id });
