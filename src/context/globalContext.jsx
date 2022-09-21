@@ -7,6 +7,8 @@ const globalReducer = (state, action) => {
   switch (action.type) {
     case 'detail':
       return { ...state, id: action.payload };
+    case 'login':
+      return { ...state, token: action.payload };
     default:
       return state;
   }
