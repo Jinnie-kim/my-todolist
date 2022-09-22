@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom';
+import { useGlobalContext } from '../hooks/useGlobalContext';
+
 import styled from 'styled-components';
 
 export default function Nav() {
+  const { token, dispatch } = useGlobalContext();
+
+  const logoutHandler = () => {
+    dispatch({ type: 'logout', payload: null });
+    localStorage.removeItem('token');
+  };
   return (
     <NavSection>
       <NavTitle>my Todo list</NavTitle>
