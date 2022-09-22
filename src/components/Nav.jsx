@@ -6,12 +6,20 @@ export default function Nav() {
     <NavSection>
       <NavTitle>my Todo list</NavTitle>
       <NavList>
-        <li>
-          <Link to="/login">LOGIN</Link>
-        </li>
-        <li>
-          <Link to="/join">JOIN</Link>
-        </li>
+        {!token ? (
+          <>
+            <li>
+              <Link to="/login">LOGIN</Link>
+            </li>
+            <li>
+              <Link to="/join">JOIN</Link>
+            </li>
+          </>
+        ) : (
+          <li>
+            <button onClick={logoutHandler}>LOGOUT</button>
+          </li>
+        )}
       </NavList>
     </NavSection>
   );
@@ -37,5 +45,19 @@ const NavList = styled.ul`
     font-weight: 700;
     text-decoration: none;
     color: #ff595e;
+  }
+  > li button {
+    padding: 10px 15px;
+    outline: none;
+    border: 1px solid #ff595e;
+    border-radius: 10px;
+    background-color: #ff595e;
+    color: #ffca3a;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+      background-color: #6a4c93;
+      border-color: #6a4c93;
+    }
   }
 `;
