@@ -9,6 +9,8 @@ const globalReducer = (state, action) => {
       return { ...state, id: action.payload };
     case 'login':
       return { ...state, token: action.payload };
+    case 'logout':
+      return { ...state, token: action.paylod };
     default:
       return state;
   }
