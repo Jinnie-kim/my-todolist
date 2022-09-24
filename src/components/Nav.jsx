@@ -7,8 +7,8 @@ export default function Nav() {
   const { token, dispatch } = useGlobalContext();
 
   const logoutHandler = () => {
-    dispatch({ type: 'logout', payload: null });
     localStorage.removeItem('token');
+    dispatch({ type: 'logout', payload: localStorage.getItem('token') });
   };
   return (
     <NavSection>
