@@ -6,14 +6,31 @@ import styled from 'styled-components';
 export default function Join() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState();
+  const [passwordError, setpasswordError] = useState();
+  const [isButtonValid, setIsButtonValid] = useState(false);
   const { join } = useJoin();
 
   const userDataHandler = (event) => {
     if (event.target.type === 'email') {
-      setEmail(event.target.value);
+      if (
+        !event.target.value.includes('@') ||
+        !event.target.value.includes('.')
+      ) {
+        setEmailError("Email should have '@' and '.'");
+      } else {
+        setEmailError();
+        setEmail(event.target.value);
+      }
     }
     if (event.target.type === 'password') {
-      setPassword(event.target.value);
+      if (event.target.value.length < 8) {
+        setpasswordError('Password should be longer than 8');
+      } else {
+        setpasswordError();
+        setIsButtonValid(true);
+        setPassword(event.target.value);
+      }
     }
   };
 
@@ -33,6 +50,7 @@ export default function Join() {
           required
           onChange={userDataHandler}
         />
+        {emailError && <strong>{emailError}</strong>}
         <JoinFormLabel htmlFor="password">Password </JoinFormLabel>
         <JoinFormInput
           type="password"
@@ -40,7 +58,14 @@ export default function Join() {
           required
           onChange={userDataHandler}
         />
-        <JoinFormButton type="submit">JOIN</JoinFormButton>
+        {passwordError && <strong>{passwordError}</strong>}
+        <JoinFormButton
+          type="submit"
+          isValid={isButtonValid}
+          disabled={!isButtonValid}
+        >
+          JOIN
+        </JoinFormButton>
       </JoinFormField>
     </JoinForm>
   );
@@ -60,6 +85,11 @@ const JoinFormField = styled.fieldset`
     font-weight: 700;
     color: #6a4c93;
     padding: 10px;
+  }
+  > strong {
+    display: inline-block;
+    margin-top: 10px;
+    color: #ff595e;
   }
 `;
 
@@ -89,9 +119,9 @@ const JoinFormButton = styled.button`
   float: right;
   padding: 6px 12px;
   border-radius: 10px;
-  background-color: #6a4c93;
+  background-color: ${(props) => (props.isValid ? '#6a4c93' : '#746687')};
   border: 1px solid #6a4c93;
-  color: #ffca3a;
+  color: ${(props) => (props.isValid ? '#ffca3a' : '#AB8828')};
   font-weight: 700;
-  cursor: pointer;
+  cursor: ${(props) => (props.isValid ? 'pointer' : 'auto')};
 `;
