@@ -18,8 +18,9 @@ const globalReducer = (state, action) => {
 
 // context를 구독할 컴포넌트의 범위를 설정
 const GlobalContextProvider = ({ children }) => {
+  const initialToken = localStorage.getItem('token');
   const [state, dispatch] = useReducer(globalReducer, {
-    token: null,
+    token: initialToken,
     id: null,
   });
 
