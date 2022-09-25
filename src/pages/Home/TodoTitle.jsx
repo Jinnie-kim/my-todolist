@@ -77,4 +77,12 @@ const Title = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  > strong {
+    display: inline-block;
+    margin-top: 50%;
+    font-size: 24px;
+    font-weight: 700;
+    color: #ff595e;
+  }
 `;
