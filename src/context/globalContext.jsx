@@ -11,6 +11,8 @@ const globalReducer = (state, action) => {
       return { ...state, token: action.payload };
     case 'logout':
       return { ...state, token: action.paylod };
+    case 'create':
+      return { ...state, create: action.payload };
     default:
       return state;
   }
@@ -22,6 +24,7 @@ const GlobalContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, {
     token: initialToken,
     id: null,
+    create: null,
   });
 
   return (
