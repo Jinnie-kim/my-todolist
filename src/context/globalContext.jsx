@@ -13,6 +13,8 @@ const globalReducer = (state, action) => {
       return { ...state, token: action.paylod };
     case 'create':
       return { ...state, create: action.payload };
+    case 'delete':
+      return { ...state, id: action.paylod };
     default:
       return state;
   }
