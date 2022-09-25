@@ -26,6 +26,7 @@ export default function Join() {
     if (event.target.type === 'password') {
       if (event.target.value.length < 8) {
         setpasswordError('Password should be longer than 8');
+        setIsButtonValid(false);
       } else {
         setpasswordError();
         setIsButtonValid(true);
