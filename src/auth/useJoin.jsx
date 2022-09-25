@@ -12,7 +12,7 @@ export const useJoin = () => {
       localStorage.setItem('token', response.data.token);
       dispatch({ type: 'login', payload: response.data.token });
     } catch (error) {
-      console.log(error);
+      alert(error.response.data.details);
     }
   };
 

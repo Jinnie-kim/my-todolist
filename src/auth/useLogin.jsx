@@ -12,7 +12,11 @@ export const useLogin = () => {
       localStorage.setItem('token', response.data.token);
       dispatch({ type: 'login', payload: response.data.token });
     } catch (error) {
-      console.log(error);
+      if (error.response.data.details === '로그인에 실패했습니다') {
+        alert('이메일, 비밀번호를 다시 확인해주세요.');
+        return;
+      }
+      alert(error.response.data.details);
     }
   };
 
