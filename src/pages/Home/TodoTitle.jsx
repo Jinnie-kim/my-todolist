@@ -9,7 +9,7 @@ export const TodoTitle = () => {
   const token = localStorage.getItem('token');
 
   // 글 개별 id 관리하기
-  const { dispatch } = useGlobalContext();
+  const { dispatch, create } = useGlobalContext();
 
   const getTodo = async () => {
     try {
@@ -29,7 +29,7 @@ export const TodoTitle = () => {
 
   useEffect(() => {
     token && getTodo();
-  }, []); 
+  }, [create]);
 
   const getTodoIdHandler = (event) => {
     dispatch({ type: 'detail', payload: event.target.id });
