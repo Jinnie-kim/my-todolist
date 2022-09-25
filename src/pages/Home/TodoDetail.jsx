@@ -7,7 +7,7 @@ export const TodoDetail = () => {
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
   const [show, setShow] = useState(false);
-  const { id } = useGlobalContext();
+  const { id, dispatch } = useGlobalContext();
   const token = localStorage.getItem('token');
 
   const getTodoDetail = async () => {
@@ -38,6 +38,7 @@ export const TodoDetail = () => {
           Authorization: token,
         },
       });
+      dispatch({ type: 'delete', payload: null });
     } catch (error) {
       console.log(error);
     }
