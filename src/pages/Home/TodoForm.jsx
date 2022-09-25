@@ -19,6 +19,8 @@ export const TodoForm = () => {
 
   const submitDataHandler = (event) => {
     event.preventDefault();
+    setTitle('');
+    setDetail('');
     createTodo(title, detail);
   };
 
@@ -28,6 +30,7 @@ export const TodoForm = () => {
       <input
         type="text"
         id="todo"
+        value={title}
         placeholder="what are you going todo ... :D"
         onChange={userDataHandler}
       />
@@ -35,6 +38,7 @@ export const TodoForm = () => {
       <input
         type="text"
         id="detail"
+        value={detail}
         placeholder="tell me more :)"
         onChange={userDataHandler}
       />
