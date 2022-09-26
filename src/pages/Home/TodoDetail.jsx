@@ -55,14 +55,13 @@ export const TodoDetail = () => {
     setShow(false);
   };
 
-  const newTodoHandler = (event) => {
-    if (event.target.id === 'title') {
-      setTitle(event.target.value);
-    }
-    if (event.target.id === 'detail') {
-      setDetail(event.target.value);
-    }
+  const newTitleDataHandler = (event) => {
+    setTitle(event.target.value);
   };
+
+  const newDetaildDataHandler = event => {
+    setDetail(event.target.value)
+  }
 
   const onTodoEditHandler = async (event) => {
     event.preventDefault();
@@ -106,7 +105,7 @@ export const TodoDetail = () => {
               type="text"
               id="title"
               value={title}
-              onChange={newTodoHandler}
+              onChange={newTitleDataHandler}
             />
 
             <label htmlFor="detail">DETAIL</label>
@@ -114,7 +113,7 @@ export const TodoDetail = () => {
               type="text"
               id="detail"
               value={detail}
-              onChange={newTodoHandler}
+              onChange={newDetaildDataHandler}
             />
           </form>
           <footer>

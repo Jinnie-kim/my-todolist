@@ -8,13 +8,12 @@ export const TodoForm = () => {
   const [detail, setDetail] = useState('');
   const { createTodo } = useCreateTodo();
 
-  const userDataHandler = (event) => {
-    if (event.target.id === 'todo') {
-      setTitle(event.target.value);
-    }
-    if (event.target.id === 'detail') {
-      setDetail(event.target.value);
-    }
+  const titleDataHandler = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const detailDataHandler = (event) => {
+    setDetail(event.target.value);
   };
 
   const submitDataHandler = (event) => {
@@ -32,7 +31,7 @@ export const TodoForm = () => {
         id="todo"
         value={title}
         placeholder="what are you going todo ... :D"
-        onChange={userDataHandler}
+        onChange={titleDataHandler}
       />
       <label htmlFor="detail">DETAIL</label>
       <input
@@ -40,7 +39,7 @@ export const TodoForm = () => {
         id="detail"
         value={detail}
         placeholder="tell me more :)"
-        onChange={userDataHandler}
+        onChange={detailDataHandler}
       />
       <button>ADD</button>
     </Form>
