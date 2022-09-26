@@ -32,15 +32,18 @@ export const TodoDetail = () => {
   }, [id]);
 
   const onTodoDeleteHandler = async () => {
-    try {
-      await axios.delete(`http://localhost:8080/todos/${id}`, {
-        headers: {
-          Authorization: token,
-        },
-      });
-      dispatch({ type: 'delete', payload: null });
-    } catch (error) {
-      console.log(error);
+    const isChecked = window.confirm('Are you sure?');
+    if (isChecked) {
+      try {
+        await axios.delete(`http://localhost:8080/todos/${id}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        dispatch({ type: 'delete', payload: null });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
