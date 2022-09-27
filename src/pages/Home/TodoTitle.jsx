@@ -6,15 +6,12 @@ import styled from 'styled-components';
 
 export const TodoTitle = () => {
   const [datas, setDatas] = useState([]);
-  const token = localStorage.getItem('token');
+  const { dispatch, token, create, id } = useGlobalContext();
   const { getTodo } = useGetTodoTitle();
-
-  // 글 개별 id 관리하기
-  const { dispatch, create, id } = useGlobalContext();
 
   useEffect(() => {
     token &&
-      getTodo().then((result) => {
+      getTodo(token).then((result) => {
         setDatas(result.data.data);
       });
   }, [create, id]);
