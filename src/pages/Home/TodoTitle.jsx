@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 export const TodoTitle = () => {
   const [datas, setDatas] = useState([]);
-  const { dispatch, token, create, id } = useGlobalContext();
+  const { dispatch, token, create, id, edit } = useGlobalContext();
   const { getTodo } = useGetTodoTitle();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export const TodoTitle = () => {
       getTodo(token).then((result) => {
         setDatas(result.data.data);
       });
-  }, [create, id]);
+  }, [create, id, edit]);
 
   const getTodoIdHandler = (event) => {
     dispatch({ type: 'detail', payload: event.target.id });
