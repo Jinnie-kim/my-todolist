@@ -1,34 +1,22 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import styled from 'styled-components';
+import useGetTodoTitle from '../../hooks/useGetTodoTitle';
 import { useGlobalContext } from '../../hooks/useGlobalContext';
+import styled from 'styled-components';
 
 export const TodoTitle = () => {
   const [datas, setDatas] = useState([]);
   const token = localStorage.getItem('token');
+  const { getTodo } = useGetTodoTitle();
 
   // 글 개별 id 관리하기
   const { dispatch, create, id } = useGlobalContext();
 
-  const getTodo = async () => {
-    try {
-      await axios
-        .get('http://localhost:8080/todos', {
-          headers: {
-            Authorization: token,
-          },
-        })
-        .then((result) => {
-          setDatas(result.data.data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    token && getTodo();
+    token &&
+      getTodo().then((result) => {
+        setDatas(result.data.data);
+      });
   }, [create, id]);
 
   const getTodoIdHandler = (event) => {
