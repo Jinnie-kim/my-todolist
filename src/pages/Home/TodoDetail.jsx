@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useGlobalContext } from '../../hooks/useGlobalContext';
 import useGetTodoDetail from '../../hooks/useGetTodoDetail';
 import useDeleteTodo from '../../hooks/useDeleteTodo';
+import useEditTodo from '../../hooks/useEditTodo';
 import styled from 'styled-components';
 
 export const TodoDetail = () => {
@@ -12,6 +12,7 @@ export const TodoDetail = () => {
   const { dispatch, token, id } = useGlobalContext();
   const { getTodoDetail } = useGetTodoDetail();
   const { deleteTodo } = useDeleteTodo();
+  const { editTodo } = useEditTodo();
 
   useEffect(() => {
     id &&
@@ -47,21 +48,8 @@ export const TodoDetail = () => {
 
   const onTodoEditHandler = async (event) => {
     event.preventDefault();
-    try {
-      await axios.put(
-        `http://localhost:8080/todos/${id}`,
-        {
-          title: title,
-          content: detail,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setShow(false);
-    } catch (error) {}
+    editTodo(id, token, title, detail);
+    setShow(false);
   };
 
   return (
