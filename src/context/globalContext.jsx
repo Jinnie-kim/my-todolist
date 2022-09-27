@@ -15,6 +15,8 @@ const globalReducer = (state, action) => {
       return { ...state, create: action.payload };
     case 'delete':
       return { ...state, id: action.paylod };
+    case 'edit':
+      return { ...state, edit: action.payload };
     default:
       return state;
   }
@@ -27,6 +29,7 @@ const GlobalContextProvider = ({ children }) => {
     token: initialToken,
     id: null,
     create: null,
+    edit: 0,
   });
 
   return (
