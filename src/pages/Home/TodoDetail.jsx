@@ -9,6 +9,8 @@ export const TodoDetail = () => {
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
   const [show, setShow] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+  const [newDetail, setNewDetail] = useState('');
   const { dispatch, token, id } = useGlobalContext();
   const { getTodoDetail } = useGetTodoDetail();
   const { deleteTodo } = useDeleteTodo();
@@ -19,8 +21,10 @@ export const TodoDetail = () => {
       getTodoDetail(id, token).then((result) => {
         setTitle(result.data.data.title);
         setDetail(result.data.data.content);
+        setNewTitle(result.data.data.title);
+        setNewDetail(result.data.data.content);
       });
-  }, [id]);
+  }, [id, show]);
 
   const onTodoDeleteHandler = async () => {
     const isChecked = window.confirm('Are you sure?');
@@ -39,16 +43,17 @@ export const TodoDetail = () => {
   };
 
   const newTitleDataHandler = (event) => {
-    setTitle(event.target.value);
+    setNewTitle(event.target.value);
   };
 
   const newDetaildDataHandler = (event) => {
-    setDetail(event.target.value);
+    setNewDetail(event.target.value);
   };
 
   const onTodoEditHandler = async (event) => {
     event.preventDefault();
-    editTodo(id, token, title, detail);
+    editTodo(id, token, newTitle, newDetail);
+    dispatch({ type: 'edit', payload: Date.now() });
     setShow(false);
   };
 
@@ -74,7 +79,7 @@ export const TodoDetail = () => {
             <input
               type="text"
               id="title"
-              value={title}
+              value={newTitle}
               onChange={newTitleDataHandler}
             />
 
@@ -82,7 +87,7 @@ export const TodoDetail = () => {
             <input
               type="text"
               id="detail"
-              value={detail}
+              value={newDetail}
               onChange={newDetaildDataHandler}
             />
           </form>
