@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useGlobalContext } from '../../hooks/useGlobalContext';
 import useGetTodoDetail from '../../hooks/useGetTodoDetail';
+import useDeleteTodo from '../../hooks/useDeleteTodo';
 import styled from 'styled-components';
 
 export const TodoDetail = () => {
@@ -10,6 +11,7 @@ export const TodoDetail = () => {
   const [show, setShow] = useState(false);
   const { dispatch, token, id } = useGlobalContext();
   const { getTodoDetail } = useGetTodoDetail();
+  const { deleteTodo } = useDeleteTodo();
 
   useEffect(() => {
     id &&
@@ -22,16 +24,8 @@ export const TodoDetail = () => {
   const onTodoDeleteHandler = async () => {
     const isChecked = window.confirm('Are you sure?');
     if (isChecked) {
-      try {
-        await axios.delete(`http://localhost:8080/todos/${id}`, {
-          headers: {
-            Authorization: token,
-          },
-        });
-        dispatch({ type: 'delete', payload: null });
-      } catch (error) {
-        console.log(error);
-      }
+      deleteTodo(id, token);
+      dispatch({ type: 'delete', payload: null });
     }
   };
 
