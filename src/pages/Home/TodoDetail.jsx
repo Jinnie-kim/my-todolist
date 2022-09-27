@@ -1,34 +1,22 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useGlobalContext } from '../../hooks/useGlobalContext';
+import useGetTodoDetail from '../../hooks/useGetTodoDetail';
 import styled from 'styled-components';
 
 export const TodoDetail = () => {
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
   const [show, setShow] = useState(false);
-  const { id, dispatch } = useGlobalContext();
-  const token = localStorage.getItem('token');
-
-  const getTodoDetail = async () => {
-    try {
-      await axios
-        .get(`http://localhost:8080/todos/${id}`, {
-          headers: {
-            Authorization: token,
-          },
-        })
-        .then((result) => {
-          setTitle(result.data.data.title);
-          setDetail(result.data.data.content);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { dispatch, token, id } = useGlobalContext();
+  const { getTodoDetail } = useGetTodoDetail();
 
   useEffect(() => {
-    id && getTodoDetail();
+    id &&
+      getTodoDetail(id, token).then((result) => {
+        setTitle(result.data.data.title);
+        setDetail(result.data.data.content);
+      });
   }, [id]);
 
   const onTodoDeleteHandler = async () => {
@@ -59,9 +47,9 @@ export const TodoDetail = () => {
     setTitle(event.target.value);
   };
 
-  const newDetaildDataHandler = event => {
-    setDetail(event.target.value)
-  }
+  const newDetaildDataHandler = (event) => {
+    setDetail(event.target.value);
+  };
 
   const onTodoEditHandler = async (event) => {
     event.preventDefault();
