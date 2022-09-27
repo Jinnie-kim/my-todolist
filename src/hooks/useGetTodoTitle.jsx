@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 const useGetTodoTitle = () => {
-  const token = localStorage.getItem('token');
-
-  const getTodo = async () => {
+  const getTodo = async (token) => {
     try {
       const result = await axios.get('http://localhost:8080/todos', {
         headers: {
