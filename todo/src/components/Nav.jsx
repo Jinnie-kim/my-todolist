@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useGlobalContext } from '../hooks/useGlobalContext';
+import { useGlobalContext } from '../todos/useGlobalContext';
 
 import styled from 'styled-components';
 
