@@ -5,7 +5,7 @@ import Nav from './components/Nav';
 import Home from './pages/Home/Home';
 import Join from './pages/Join/Join';
 import Login from './pages/Login/Login';
-import { useGlobalContext } from './todos/useGlobalContext';
+import { useGlobalContext } from './api/todos/useGlobalContext';
 
 export default function App() {
   const { token } = useGlobalContext();

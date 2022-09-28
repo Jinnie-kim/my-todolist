@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import useGetTodoTitle from '../../todos/useGetTodoTitle';
-import { useGlobalContext } from '../../todos/useGlobalContext';
+import useGetTodoTitle from '../../api/todos/useGetTodoTitle';
+import { useGlobalContext } from '../../api/todos/useGlobalContext';
 import styled from 'styled-components';
 
 export const TodoTitle = () => {

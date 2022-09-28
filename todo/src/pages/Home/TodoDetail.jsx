@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useGlobalContext } from '../../todos/useGlobalContext';
-import useGetTodoDetail from '../../todos/useGetTodoDetail';
-import useDeleteTodo from '../../todos/useDeleteTodo';
-import useEditTodo from '../../todos/useEditTodo';
+import { useGlobalContext } from '../../api/todos/useGlobalContext';
+import useGetTodoDetail from '../../api/todos/useGetTodoDetail';
+import useDeleteTodo from '../../api/todos/useDeleteTodo';
+import useEditTodo from '../../api/todos/useEditTodo';
 import styled from 'styled-components';
 
 export const TodoDetail = () => {
