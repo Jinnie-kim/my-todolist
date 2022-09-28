@@ -9,14 +9,13 @@ export default function Login() {
   const [isButtonValid, setIsButtonValid] = useState(false);
   const { login } = useLogin();
 
-  const userDataHandler = (event) => {
-    if (event.target.type === 'email') {
-      setEmail(event.target.value);
-    }
-    if (event.target.type === 'password') {
-      setPassword(event.target.value);
-      setIsButtonValid(true);
-    }
+  const userEmailHandler = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const userPasswordHandler = (event) => {
+    setPassword(event.target.value);
+    setIsButtonValid(true);
   };
 
   const dataSubmitHandler = (event) => {
@@ -33,14 +32,14 @@ export default function Login() {
           type="email"
           id="email"
           required
-          onChange={userDataHandler}
+          onChange={userEmailHandler}
         />
         <LoginFormLabel htmlFor="password">Password </LoginFormLabel>
         <LoginFormInput
           type="password"
           id="password"
           required
-          onChange={userDataHandler}
+          onChange={userPasswordHandler}
         />
         <LoginFormButton
           type="submit"

@@ -11,27 +11,26 @@ export default function Join() {
   const [isButtonValid, setIsButtonValid] = useState(false);
   const { join } = useJoin();
 
-  const userDataHandler = (event) => {
-    if (event.target.type === 'email') {
-      if (
-        !event.target.value.includes('@') ||
-        !event.target.value.includes('.')
-      ) {
-        setEmailError("Email should have '@' and '.'");
-      } else {
-        setEmailError();
-        setEmail(event.target.value);
-      }
+  const userEmailHandler = (event) => {
+    if (
+      !event.target.value.includes('@') ||
+      !event.target.value.includes('.')
+    ) {
+      setEmailError("Email should have '@' and '.'");
+    } else {
+      setEmailError();
+      setEmail(event.target.value);
     }
-    if (event.target.type === 'password') {
-      if (event.target.value.length < 8) {
-        setpasswordError('Password should be longer than 8');
-        setIsButtonValid(false);
-      } else {
-        setpasswordError();
-        setIsButtonValid(true);
-        setPassword(event.target.value);
-      }
+  };
+
+  const userPasswordHandler = (event) => {
+    if (event.target.value.length < 8) {
+      setpasswordError('Password should be longer than 8');
+      setIsButtonValid(false);
+    } else {
+      setpasswordError();
+      setIsButtonValid(true);
+      setPassword(event.target.value);
     }
   };
 
@@ -49,7 +48,7 @@ export default function Join() {
           type="email"
           id="email"
           required
-          onChange={userDataHandler}
+          onChange={userEmailHandler}
         />
         {emailError && <strong>{emailError}</strong>}
         <JoinFormLabel htmlFor="password">Password </JoinFormLabel>
@@ -57,7 +56,7 @@ export default function Join() {
           type="password"
           id="password"
           required
-          onChange={userDataHandler}
+          onChange={userPasswordHandler}
         />
         {passwordError && <strong>{passwordError}</strong>}
         <JoinFormButton
