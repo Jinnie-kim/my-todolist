@@ -16,7 +16,6 @@ export const useLogin = () => {
         alert('이메일, 비밀번호를 다시 확인해주세요.');
         return;
       }
-      alert(error.response.data.details);
     }
   };
 
