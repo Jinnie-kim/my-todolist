@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useJoin } from '../../auth/useJoin';
+import { useJoin } from '../../api/auth/useJoin';
 
 import styled from 'styled-components';
 

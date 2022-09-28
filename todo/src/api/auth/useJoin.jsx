@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useGlobalContext } from '../hooks/useGlobalContext';
+import { useGlobalContext } from '../../hooks/useGlobalContext';
 
 export const useJoin = () => {
   const { dispatch } = useGlobalContext();
