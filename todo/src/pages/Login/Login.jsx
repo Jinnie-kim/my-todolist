@@ -6,16 +6,32 @@ import styled from 'styled-components';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState();
+  const [passwordError, setpasswordError] = useState();
   const [isButtonValid, setIsButtonValid] = useState(false);
   const { login } = useLogin();
 
   const userEmailHandler = (event) => {
-    setEmail(event.target.value);
+    if (
+      !event.target.value.includes('@') ||
+      !event.target.value.includes('.')
+    ) {
+      setEmailError("Email should have '@' and '.'");
+    } else {
+      setEmailError();
+      setEmail(event.target.value);
+    }
   };
 
   const userPasswordHandler = (event) => {
-    setPassword(event.target.value);
-    setIsButtonValid(true);
+    if (event.target.value.length < 8) {
+      setpasswordError('Password should be longer than 8');
+      setIsButtonValid(false);
+    } else {
+      setpasswordError();
+      setIsButtonValid(true);
+      setPassword(event.target.value);
+    }
   };
 
   const dataSubmitHandler = (event) => {
@@ -34,6 +50,7 @@ export default function Login() {
           required
           onChange={userEmailHandler}
         />
+        {emailError && <strong>{emailError}</strong>}
         <LoginFormLabel htmlFor="password">Password </LoginFormLabel>
         <LoginFormInput
           type="password"
@@ -41,6 +58,7 @@ export default function Login() {
           required
           onChange={userPasswordHandler}
         />
+        {passwordError && <strong>{passwordError}</strong>}
         <LoginFormButton
           type="submit"
           isValid={isButtonValid}
@@ -67,6 +85,11 @@ const LoginFormField = styled.fieldset`
     font-weight: 700;
     color: #6a4c93;
     padding: 10px;
+  }
+  > strong {
+    display: inline-block;
+    margin-top: 10px;
+    color: #ff595e;
   }
 `;
 
