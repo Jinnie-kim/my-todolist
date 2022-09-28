@@ -205,6 +205,5 @@ my-todolist
 
 > ## 프로젝트를 진행하면서 찾아낸 공부가 필요한 부분
 
-- async await, promise 비동기 파트의 공부가 부족하다. 
-<br />
+- async await, promise 비동기 파트의 공부가 부족하다. <br />
 기본 개념부터 심화까지 자바스크립트 비동기 공부를 해야겠다
